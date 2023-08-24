@@ -18,7 +18,7 @@ public class BingSearchByTerm {
     private static final String ALPHA_SEARCH_RESULT = "IT Career Start in 6 Months - Telerik Academy Alpha";
     private static final String ALPHA_SEARCH_RESULT_2 = "Telerik Academy Alpha - IT Career Start in 6 Months";
     private static final String CDP_SELENIUM = "cdp + selenium";
-    private static final String CDP_SEARCH_RESULT = "Chrome DevTools | Selenium";
+    private static final String CDP_SEARCH_RESULT = "Chrome DevTools";
     private static final String ERROR_MESSAGE = "The first result found was not as expected";
     private static WebDriver driver;
 
@@ -27,11 +27,11 @@ public class BingSearchByTerm {
 
     @BeforeAll
     public static void startUp() {
-        driver = DriverType.choseDriver(DriverType.CHROME);
+        driver = DriverType.choseDriver(DriverType.EDGE);
 
         driver.navigate().to(BING_COM);
 
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy
                 (By.xpath("//button[@id='bnp_btn_accept']")));
 
@@ -53,14 +53,16 @@ public class BingSearchByTerm {
     public void correctResultFound_when_searchingByTerm_telerikAcademyAlpha() {
         WebElement searchField = driver.findElement
                 (By.xpath("//input[@id='sb_form_q']"));
-        searchField.sendKeys(TELERIK_ACADEMY_ALPHA, Keys.ENTER);
+        searchField.sendKeys(TELERIK_ACADEMY_ALPHA);
 
-        //Firefox browser is not working without the following wait:
-       // wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy
-       //         (By.xpath("(//h2/a)[1]")));
+        WebElement searchButton = driver.findElement
+                (By.xpath("//label[@id='search_icon']"));
+        searchButton.click();
+//        //some headless browsers were not working without the following wait:
+//        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy
+//                (By.xpath("(//h2)[1]")));
         WebElement searchFirstResult = driver.findElement
                 (By.xpath("(//h2)[1]"));
-//        Assertions.assertEquals(ALPHA_SEARCH_RESULT, searchFirstResult.getText(), ERROR_MESSAGE);
         Assertions.assertTrue(searchFirstResult.getText().contains(ALPHA_SEARCH_RESULT) ||
                 (searchFirstResult.getText().contains(ALPHA_SEARCH_RESULT_2)), ERROR_MESSAGE );
     }
@@ -73,7 +75,6 @@ public class BingSearchByTerm {
 //        searchField.sendKeys(CDP_SELENIUM, Keys.ENTER); //using keyboard <enter> instead of search button
 //
 //        //Firefox browser is not working without the following wait:
-//
 //        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy
 //                (By.xpath("(//h2/a)[1]")));
 //        WebElement searchFirstResult = driver.findElement

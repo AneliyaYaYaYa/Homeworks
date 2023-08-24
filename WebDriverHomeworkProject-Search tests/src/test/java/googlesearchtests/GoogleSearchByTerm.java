@@ -2,6 +2,7 @@ package googlesearchtests;
 
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -15,7 +16,7 @@ public class GoogleSearchByTerm {
     private static final String ALPHA_SEARCH_RESULT = "IT Career Start in 6 Months - Telerik Academy Alpha";
     private static final String ALPHA_SEARCH_RESULT_2 = "Telerik Academy Alpha - IT Career Start in 6 Months";
     private static final String ERROR_MESSAGE = "The first result found was not as expected";
-    private static final String SELENIUM_CDP_RESULT = "Chrome DevTools - Selenium";
+    private static final String SELENIUM_CDP_RESULT = "Chrome DevTools";
     private static final String GOOGLE_COM = "https://www.google.com/";
     private static final String TELERIK_ACADEMY_ALPHA = "Telerik Academy Alpha";
     public static final String CDP_SELENIUM = "cdp + selenium";
@@ -23,11 +24,11 @@ public class GoogleSearchByTerm {
 
     @BeforeAll
     public static void startUpClass() {
-        driver = DriverType.choseDriver(DriverType.CHROME_HEADLESS);
+        driver = DriverType.choseDriver(DriverType.CHROME);
         driver.get(GOOGLE_COM);
 
         //implicit wait:
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
         WebElement agreeToCookies = driver.findElement
                 (By.xpath("//button[@id='L2AGLb']"));
@@ -48,27 +49,28 @@ public class GoogleSearchByTerm {
     public void correctResultFound_when_searchingByTerm_telerikAcademyAlpha() {
         WebElement searchField = driver.findElement
                 (By.xpath("//textarea[@name='q'][@class='gLFyf']"));
-        searchField.sendKeys(TELERIK_ACADEMY_ALPHA);
+        searchField.sendKeys(TELERIK_ACADEMY_ALPHA, Keys.ENTER);
 
-        WebElement searchButton = driver.findElement
-                (By.xpath("//input[@name='btnK'][1]"));
-        searchButton.click();
+        //the button below did not work with Firefox, so it had to go :D
+//        WebElement searchButton = driver.findElement
+//                (By.xpath("//input[@name='btnK'][1]"));
+//        searchButton.click();
 
         WebElement searchFirstResult = driver.findElement
                 (By.xpath("//a/h3[@class='LC20lb MBeuO DKV0Md'][1]"));
         Assertions.assertTrue(searchFirstResult.getText().contains(ALPHA_SEARCH_RESULT) ||
-                (searchFirstResult.getText().contains(ALPHA_SEARCH_RESULT_2)), ERROR_MESSAGE );
+                (searchFirstResult.getText().contains(ALPHA_SEARCH_RESULT_2)), ERROR_MESSAGE);
     }
 //  //additional test
 //    @Test
 //    public void correctResultFound_when_searchingByTerm_cdpselenium() {
 //        WebElement searchField = driver.findElement
 //                (By.xpath("//textarea[@name='q'][@class='gLFyf']"));
-//        searchField.sendKeys(CDP_SELENIUM);
+//        searchField.sendKeys(CDP_SELENIUM, Keys.ENTER);
 //
-//        WebElement searchButton = driver.findElement
-//                (By.xpath("//input[@name='btnK'][1]"));
-//        searchButton.click();
+//       // WebElement searchButton = driver.findElement
+//       //         (By.xpath("//input[@name='btnK'][1]"));
+//       // searchButton.click();
 //
 //        WebElement searchFirstResult = driver.findElement
 //                (By.xpath("//a/h3[@class='LC20lb MBeuO DKV0Md'][1]"));

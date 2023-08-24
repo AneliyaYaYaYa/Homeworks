@@ -28,11 +28,11 @@ public enum DriverType {
                 return new FirefoxDriver();
             case EDGE_HEADLESS:
                 EdgeOptions option = new EdgeOptions();
-                option.addArguments("--headless");
+                option.addArguments("--headless=new");
                 return new EdgeDriver(option);
             case CHROME_HEADLESS:
                 ChromeOptions optionChrome = new ChromeOptions();
-                optionChrome.addArguments("--headless");
+                optionChrome.addArguments("--headless=new");
                 return new ChromeDriver(optionChrome);
             case FIREFOX_HEADLESS:
                 FirefoxOptions optionFirefox = new FirefoxOptions();
