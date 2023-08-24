@@ -59,7 +59,7 @@ public class GoogleSearchByTerm {
         Assertions.assertTrue(searchFirstResult.getText().contains(ALPHA_SEARCH_RESULT) ||
                 (searchFirstResult.getText().contains(ALPHA_SEARCH_RESULT_2)), ERROR_MESSAGE );
     }
-//  additional test
+//  //additional test
 //    @Test
 //    public void correctResultFound_when_searchingByTerm_cdpselenium() {
 //        WebElement searchField = driver.findElement

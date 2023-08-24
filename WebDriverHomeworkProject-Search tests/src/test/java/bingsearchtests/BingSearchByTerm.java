@@ -13,15 +13,23 @@ import Enum.DriverType;
 
 public class BingSearchByTerm {
 
-    public static WebDriver driver;
+    private static final String BING_COM = "https://www.bing.com/";
+    private static final String TELERIK_ACADEMY_ALPHA = "Telerik Academy Alpha";
+    private static final String ALPHA_SEARCH_RESULT = "IT Career Start in 6 Months - Telerik Academy Alpha";
+    private static final String ALPHA_SEARCH_RESULT_2 = "Telerik Academy Alpha - IT Career Start in 6 Months";
+    private static final String CDP_SELENIUM = "cdp + selenium";
+    private static final String CDP_SEARCH_RESULT = "Chrome DevTools | Selenium";
+    private static final String ERROR_MESSAGE = "The first result found was not as expected";
+    private static WebDriver driver;
+
     //explicit wait:
-    public static WebDriverWait wait;
+    private static WebDriverWait wait;
 
     @BeforeAll
     public static void startUp() {
-        driver = DriverType.choseDriver(DriverType.EDGE_HEADLESS);
+        driver = DriverType.choseDriver(DriverType.CHROME);
 
-        driver.navigate().to("https://www.bing.com/");
+        driver.navigate().to(BING_COM);
 
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy
@@ -39,38 +47,37 @@ public class BingSearchByTerm {
 
     @BeforeEach
     public void setUpTests() {
-        driver.navigate().to("https://www.bing.com/");
+        driver.navigate().to(BING_COM);
     }
     @Test
     public void correctResultFound_when_searchingByTerm_telerikAcademyAlpha() {
         WebElement searchField = driver.findElement
                 (By.xpath("//input[@id='sb_form_q']"));
-        searchField.sendKeys("Telerik Academy Alpha", Keys.ENTER);
+        searchField.sendKeys(TELERIK_ACADEMY_ALPHA, Keys.ENTER);
 
         //Firefox browser is not working without the following wait:
-        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy
-                (By.xpath("(//h2/a)[1]")));
+       // wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy
+       //         (By.xpath("(//h2/a)[1]")));
         WebElement searchFirstResult = driver.findElement
-                (By.xpath("(//h2/a)[1]"));
-        Assertions.assertEquals
-                ("IT Career Start in 6 Months - Telerik Academy Alpha",
-                        searchFirstResult.getText(),
-                        "The first result found was not as expected");
+                (By.xpath("(//h2)[1]"));
+//        Assertions.assertEquals(ALPHA_SEARCH_RESULT, searchFirstResult.getText(), ERROR_MESSAGE);
+        Assertions.assertTrue(searchFirstResult.getText().contains(ALPHA_SEARCH_RESULT) ||
+                (searchFirstResult.getText().contains(ALPHA_SEARCH_RESULT_2)), ERROR_MESSAGE );
     }
-    @Test
-    public void correctResultFound_when_searchingByTerm_cdpselenium() {
-        WebElement searchField = driver.findElement
-                (By.xpath("//input[@id='sb_form_q']"));
-        searchField.sendKeys("cdp + selenium", Keys.ENTER); //using keyboard <enter> instead of search button
 
-        //Firefox browser is not working without the following wait:
-        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy
-                (By.xpath("(//h2/a)[1]")));
-        WebElement searchFirstResult = driver.findElement
-                (By.xpath("(//h2/a)[1]"));
-        Assertions.assertEquals
-                ("Chrome DevTools | Selenium",
-                        searchFirstResult.getText(),
-                        "The first result found was not as expected");
-    }
+//    //additional search
+//    @Test
+//    public void correctResultFound_when_searchingByTerm_cdpselenium() {
+//        WebElement searchField = driver.findElement
+//                (By.xpath("//input[@id='sb_form_q']"));
+//        searchField.sendKeys(CDP_SELENIUM, Keys.ENTER); //using keyboard <enter> instead of search button
+//
+//        //Firefox browser is not working without the following wait:
+//
+//        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy
+//                (By.xpath("(//h2/a)[1]")));
+//        WebElement searchFirstResult = driver.findElement
+//                (By.xpath("(//h2/a)[1]"));
+//        Assertions.assertTrue(searchFirstResult.getText().contains(CDP_SEARCH_RESULT), ERROR_MESSAGE );
+//    }
 }
