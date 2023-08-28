@@ -14,31 +14,46 @@ import static core.ErrorMessages.*;
 
 public class ProductTests extends BaseTest {
 
-    @ParameterizedTest
-    @CsvSource ({
-            "Sauce Labs Backpack, $29.99",
-            "Sauce Labs Bike Light, $9.99",
-            "Sauce Labs Bolt T-Shirt, $15.99",
-            "Sauce Labs Fleece Jacket, $49.99",
-            "Sauce Labs Onesie, $7.99",
-            "Test.allTheThings() T-Shirt (Red), $15.99"
-    })
-    public void productAddedToShoppingCart_when_addToCart(String searchTerm, String searchPrice) {
-        authenticateWithUser(new LoginForm(USERNAME, PASSWORD));
-        WebElement chooseProduct = getProductByTile(searchTerm);
-        chooseProduct.findElement(By.className("btn_inventory")).click();
-        WebElement shoppingCart = driver.findElement(By.xpath("//a[@class='shopping_cart_link']"));
-        shoppingCart.click();
+//    //VERSION_1
+//    @ParameterizedTest
+//    @CsvSource ({
+//            "Sauce Labs Backpack, $29.99",
+//            "Sauce Labs Bike Light, $9.99",
+//            "Sauce Labs Bolt T-Shirt, $15.99",
+//            "Sauce Labs Fleece Jacket, $49.99",
+//            "Sauce Labs Onesie, $7.99",
+//            "Test.allTheThings() T-Shirt (Red), $15.99"
+//    })
+//    public void productAddedToShoppingCart_when_addToCart(String searchTerm, String searchPrice) {
+//        authenticateWithUser(new LoginForm(USERNAME, PASSWORD));
+//        WebElement chooseProduct = getProductByTile(searchTerm);
+//        chooseProduct.findElement(By.className("btn_inventory")).click();
+//        WebElement shoppingCart = driver.findElement(By.xpath("//a[@class='shopping_cart_link']"));
+//        shoppingCart.click();
+//
+//        var items = driver.findElements(By.className("inventory_item_name"));
+//        var prices = driver.findElements(By.className("inventory_item_price"));
+//
+//        Assertions.assertEquals(searchTerm, items.get(0).getText(),
+//                PRODUCT_ERROR_MSG);
+//        Assertions.assertEquals(searchPrice, prices.get(0).getText(),
+//                PRICE_ERROR_MSG);
+//        System.out.println(PRODUCTS_SUCCESS_MSG);
+//    }
+        //VERSION_2
+        @Test
+        public void productAddedToShoppingCart_when_addToCart() {
+            addProductsToCart();
 
-        var items = driver.findElements(By.className("inventory_item_name"));
-        var prices = driver.findElements(By.className("inventory_item_price"));
+            var items = driver.findElements(By.className("inventory_item_name"));
+            Assertions.assertEquals(2,items.size(), ITEM_COUNT_ERROR_MSG);
+            Assertions.assertEquals("Sauce Labs Backpack", items.get(0).getText(),
+                    PRODUCT_ERROR_MSG);
+            Assertions.assertEquals("Sauce Labs Bolt T-Shirt", items.get(1).getText(),
+                    PRODUCT_ERROR_MSG);
+            System.out.println(PRODUCTS_SUCCESS_MSG);
+        }
 
-        Assertions.assertEquals(searchTerm, items.get(0).getText(),
-                PRODUCT_ERROR_MSG);
-        Assertions.assertEquals(searchPrice, prices.get(0).getText(),
-                PRICE_ERROR_MSG);
-        System.out.println(PRODUCTS_SUCCESS_MSG);
-    }
 
 
     @Test

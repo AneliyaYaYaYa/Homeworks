@@ -11,8 +11,6 @@ import static core.ErrorMessages.*;
 
 public class LoginTest extends BaseTest {
 
-
-
     @Test
     public void userAuthenticated_when_validCredentialsProvided() {
         authenticateWithUser(new LoginForm(USERNAME, PASSWORD));

@@ -22,6 +22,7 @@ public class BaseTest {
 
     @BeforeEach
     public  void startUp() {
+        //SWITCH the browser type from here
         driver = BrowserTypes.choseDriver(BrowserTypes.CHROME);
         driver.get(URL);
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
