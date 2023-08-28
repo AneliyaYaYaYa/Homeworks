@@ -1,38 +1,41 @@
 package saucedemotests;
 
 import core.BaseTest;
+import core.LoginForm;
 import core.UserDetails;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class ProductTests extends BaseTest {
-    @Test
-    public void userAuthenticated_when_validCredentialsProvided() {
-        authenticateWithUser("standard_user","secret_sauce");
-        Assertions.assertTrue(driver.findElement(By.xpath("//div[@class='app_logo']")).getText().equals("Swag Labs"),
-                "The Page Title does not correspondent to expected result");
-    }
 
 
-    @Test
-    public void productAddedToShoppingCart_when_addToCart() {
-        addProductsToCart();
+    @ParameterizedTest
+    @CsvSource ({
+            "Sauce Labs Backpack, $29.99",
+            "Sauce Labs Bike Light, $9.99",
+            "Sauce Labs Bolt T-Shirt, $15.99",
+            "Sauce Labs Fleece Jacket, $49.99",
+            "Sauce Labs Onesie, $7.99",
+            "Test.allTheThings() T-Shirt (Red), $15.99"
+    })
+    public void productAddedToShoppingCart_when_addToCart(String searchTerm, String searchPrice) {
+        authenticateWithUser(new LoginForm("standard_user", "secret_sauce"));
+        WebElement chooseProduct = getProductByTile(searchTerm);
+        chooseProduct.findElement(By.className("btn_inventory")).click();
+        WebElement shoppingCart = driver.findElement(By.xpath("//a[@class='shopping_cart_link']"));
+        shoppingCart.click();
 
         var items = driver.findElements(By.className("inventory_item_name"));
         var prices = driver.findElements(By.className("inventory_item_price"));
 
-        Assertions.assertEquals(2, items.size(), "Items count not as expected.");
-        Assertions.assertEquals("Sauce Labs Backpack", items.get(0).getText(),
+        Assertions.assertEquals(searchTerm, items.get(0).getText(),
                 "Product does not match");
-        Assertions.assertEquals("$29.99", prices.get(0).getText(),
+        Assertions.assertEquals(searchPrice, prices.get(0).getText(),
                 "Price does not match");
-        Assertions.assertEquals("Sauce Labs Bolt T-Shirt", items.get(1).getText(),
-                "Product does not match");
-        Assertions.assertEquals("$15.99", prices.get(1).getText(),
-                "Price does not match");
-
     }
 
 

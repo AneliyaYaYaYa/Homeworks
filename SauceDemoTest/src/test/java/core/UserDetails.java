@@ -16,7 +16,7 @@ public class UserDetails {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    private void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
@@ -24,7 +24,7 @@ public class UserDetails {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    private void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
@@ -32,7 +32,7 @@ public class UserDetails {
         return zipCode;
     }
 
-    public void setZipCode(String zipCode) {
+    private void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
 }
