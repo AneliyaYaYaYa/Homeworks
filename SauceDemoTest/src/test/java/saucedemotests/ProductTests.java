@@ -10,22 +10,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import static core.ErrorMessages.*;
+
 public class ProductTests extends BaseTest {
-
-
-    private static final String SHOPPINGCART_ERROR_MSG = "Item list not empty as expected.";
-    private static final String FIRST_NAME = "A";
-    private static final String LAST_NAME = "B";
-    private static final String ZIP_CODE = "C";
-    private static final String PRODUCT_ERROR_MSG = "Product does not match";
-    private static final String PRICE_ERROR_MSG = "Price does not match";
-    private static final String PRODUCTS_SUCCESS_MSG = "Products added successfully!";
-    private static final String CHECKOUT_SUCCESS_MSG = "Check out done with valid information.";
-    private static final String ITEM_COUNT_ERROR_MSG = "Items count not as expected.";
-    private static final String TOTAL_AMOUNT_ERROR_MSG = "The total amount not as expected.";
-    private static final String ORDER_ERROR_MSG = "Order not completed as expected.";
-    private static final String ORDER_SUCCESS_MSG = "Order completed successfully!";
-    private static final String SHOPPINGCART_SUCCESS_MSG = "Shopping cart empty after successful check out.";
 
     @ParameterizedTest
     @CsvSource ({
