@@ -38,7 +38,6 @@ public class ProductTests extends BaseTest {
 
     @Test
     public void usersDetailsAdded_when_checkOutWithValidInfo() {
-        //authenticateWithUser("standard_user","secret_sauce");
         addProductsToCart();
         addUsersDetails(new UserDetails("A", "B", "C"));
 

@@ -1,6 +1,7 @@
 package core;
 
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.By;
@@ -17,26 +18,21 @@ public class BaseTest {
     public static final String URL = "https://www.saucedemo.com/";
     public static WebDriver driver;
     public static WebDriverWait wait;
-    @BeforeAll
-    public static void startUp() {
+    @BeforeEach
+    public void startUp() {
         driver = BrowserTypes.choseDriver(BrowserTypes.CHROME);
 
         driver.get(URL);
 
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
-        //authenticateWithUser("standard_user","secret_sauce");
     }
 
-    @AfterAll
-    public static void terminate() {
+    @AfterEach
+    public void terminate() {
         driver.close();
     }
 
-//    @BeforeEach
-//    public void setUpTests() {
-//        driver.navigate().to(URL);
-//    }
 
     protected static void authenticateWithUser(String username, String pass){
         WebElement usernameInput = driver.findElement(By.xpath("//input[@id='user-name']"));
@@ -64,7 +60,7 @@ public class BaseTest {
         shoppingCart.click();
     }
     protected static void addUsersDetails(UserDetails details) {
-//(String myFirstName, String myLastName, String myZipCode)
+
         driver.findElement(By.id("checkout")).click();
         //fill contact details
         driver.findElement(By.id("first-name")).sendKeys(details.firstName);
