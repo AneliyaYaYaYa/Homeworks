@@ -24,7 +24,6 @@ public class BaseTest {
         driver = BrowserTypes.choseDriver(BrowserTypes.CHROME);
         driver.get(URL);
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-
     }
 
     @AfterEach
