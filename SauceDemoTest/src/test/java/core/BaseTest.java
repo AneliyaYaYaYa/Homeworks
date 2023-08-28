@@ -16,6 +16,8 @@ import java.time.Duration;
 public class BaseTest {
 
     public static final String URL = "https://www.saucedemo.com/";
+    public static final String USERNAME = "standard_user";
+    public static final String PASSWORD = "secret_sauce";
     public static WebDriver driver;
     public static WebDriverWait wait;
 
@@ -55,7 +57,7 @@ public class BaseTest {
     }
 
     protected static void addProductsToCart() {
-        authenticateWithUser(new LoginForm("standard_user", "secret_sauce"));
+        authenticateWithUser(new LoginForm(USERNAME, PASSWORD));
 //        //add backpack and t-shirt to cart
 //        WebElement chooseBackPack = driver.findElement(By.xpath("//button[@id='add-to-cart-sauce-labs-backpack']"));
 //        chooseBackPack.click();
@@ -83,7 +85,6 @@ public class BaseTest {
     protected static void addUsersDetails(UserDetails details) {
 
         driver.findElement(By.id("checkout")).click();
-        //fill contact details
         driver.findElement(By.id("first-name")).sendKeys(details.firstName);
         driver.findElement(By.id("last-name")).sendKeys(details.lastName);
         driver.findElement(By.id("postal-code")).sendKeys(details.zipCode);
