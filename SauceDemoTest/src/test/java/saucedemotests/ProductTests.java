@@ -1,7 +1,6 @@
 package saucedemotests;
 
 import core.BaseTest;
-import core.LoginForm;
 import core.UserDetails;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
