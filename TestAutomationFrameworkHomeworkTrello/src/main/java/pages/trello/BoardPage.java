@@ -27,6 +27,16 @@ public class BoardPage extends BaseTrelloPage {
 
     }
 
+    public void addListToCard(String listName){
+
+        actions.waitForElementClickable("trello.createList.titleInput");
+        actions.typeValueInField(listName, "trello.createList.titleInput");
+
+        actions.waitForElementClickable("trello.createList.addButton");
+        actions.clickElement("trello.createList.addButton");
+
+    }
+
     public void addCardToList() {
         String cardName = getUIMappingByKey("trello.cardName");
         String listName = "To Do";

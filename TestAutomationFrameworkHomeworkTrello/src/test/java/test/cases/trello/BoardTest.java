@@ -19,6 +19,8 @@ public class BoardTest extends BaseTest {
         boardsPage.createBoard();
 
         BoardPage boardPage = new BoardPage(actions.getDriver());
+        boardPage.addListToCard("To Do");
+        boardPage.addListToCard("Doing");
         boardPage.assertListExists("To Do");
     }
 
