@@ -17,16 +17,27 @@ public class BaseTest {
 
     }
 
-//    @AfterClass
-//    public static void tearDown() {
-//
-//        UserActions.quitDriver();
-//    }
+    @AfterClass
+    public static void tearDown() {
+
+
+        UserActions.quitDriver();
+    }
 
     public void login() {
 
         LoginPage loginPage = new LoginPage(actions.getDriver());
         loginPage.loginUser("user");
     }
+
+    public void logout() {
+
+        actions.waitForElementClickable("//button[@data-testid='header-member-menu-button']");
+        actions.clickElement("//button[@data-testid='header-member-menu-button']");
+        actions.waitForElementClickable("//a[@data-testid='switch-accounts-link']");
+        actions.clickElement("//a[@data-testid='switch-accounts-link']");
+
+    }
+
 
 }

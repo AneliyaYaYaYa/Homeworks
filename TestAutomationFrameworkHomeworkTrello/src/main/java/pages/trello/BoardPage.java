@@ -29,6 +29,9 @@ public class BoardPage extends BaseTrelloPage {
 
     public void addListToCard(String listName){
 
+        //actions.waitForElementVisible("//span[text()='Add another list' or text()='Add a list']");
+        //actions.clickElement("//span[text()='Add another list' or text()='Add a list']");
+
         actions.waitForElementClickable("trello.createList.titleInput");
         actions.typeValueInField(listName, "trello.createList.titleInput");
 
@@ -76,8 +79,8 @@ public class BoardPage extends BaseTrelloPage {
         actions.waitForElementClickable("trello.boardPage.board.closeBoardConfirm");
         actions.clickElement("trello.boardPage.board.closeBoardConfirm");
 
-        actions.waitForElementClickable("trello.boardPage.openBoardsMenu");
-        actions.clickElement("trello.boardPage.openBoardsMenu");
+//        actions.waitForElementClickable("trello.boardPage.openBoardsMenu");
+//        actions.clickElement("trello.boardPage.openBoardsMenu");
 
     }
 
@@ -94,8 +97,6 @@ public class BoardPage extends BaseTrelloPage {
     }
 
     public void assertBoardDeleted() {
-        //String boardContainer = "//ul[@class='boards-page-board-section-list']";
-        //Assert.isTrue(boardContainer.length()<2, "Boards field is not empty.");
-        actions.waitForElementPresent("//p[text()='You don’t have any boards in this Workspace yet. Boards you create or join will show up here.']");
+        actions.waitForElementPresent("//h1[@data-testid='close-board-big-message']");
     }
 }

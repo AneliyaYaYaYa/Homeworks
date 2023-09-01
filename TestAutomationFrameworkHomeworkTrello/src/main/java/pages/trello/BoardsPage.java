@@ -14,6 +14,7 @@ public class BoardsPage extends BaseTrelloPage {
 
         String boardName = getUIMappingByKey("trello.boardName");
 
+        actions.waitForElementVisible("trello.header.create.menuButton");
         actions.waitForElementClickable("trello.header.create.menuButton");
         actions.clickElement("trello.header.create.menuButton");
 

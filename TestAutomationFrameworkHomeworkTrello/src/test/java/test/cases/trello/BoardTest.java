@@ -1,5 +1,7 @@
 package test.cases.trello;
 
+import org.junit.After;
+import org.junit.Before;
 import pages.trello.BoardPage;
 import pages.trello.BoardsPage;
 
@@ -10,50 +12,71 @@ import static com.telerikacademy.testframework.Utils.getUIMappingByKey;
 
 public class BoardTest extends BaseTest {
 
+    @Before
+    public void beforeTests(){
+        login();
+
+    }
+    @After
+    public void afterTest(){
+        logout();
+    }
+
+
+
     @Test
     public void createBoardWhenCreateBoardClicked() {
-
-        login();
 
         BoardsPage boardsPage = new BoardsPage(actions.getDriver());
         boardsPage.createBoard();
 
         BoardPage boardPage = new BoardPage(actions.getDriver());
-        //if there is a board already created, you need to uncomment the following 2 lines //sorry
-//        boardPage.addListToCard("To Do");
-//        boardPage.addListToCard("Doing");
+        boardPage.addListToCard("To Do");
         boardPage.assertListExists("To Do");
+
+        boardPage.deleteBoard();
     }
 
 
     @Test
     public void createNewCardInExistingBoardWhenCreateCardClicked() {
-        login();
+        BoardsPage boardsPage = new BoardsPage(actions.getDriver());
+        boardsPage.createBoard();
 
         BoardPage boardPage = new BoardPage(actions.getDriver());
-        boardPage.openBoard();
+        boardPage.addListToCard("To Do");
         boardPage.addCardToList();
         boardPage.assertCardExists("My First Card");
+
+        boardPage.deleteBoard();
 
     }
 
     @Test
     public void moveCardBetweenStatesWhenDragAndDropIsUsed() {
 
-        login();
+        BoardsPage boardsPage = new BoardsPage(actions.getDriver());
+        boardsPage.createBoard();
+
         BoardPage boardPage = new BoardPage(actions.getDriver());
-        boardPage.openBoard();
+        boardPage.addListToCard("To Do");
+        boardPage.addListToCard("Doing");
+        boardPage.addCardToList();
         boardPage.moveCardToList();
         boardPage.assertCardMoved("Doing", "My First Card");
+
+        boardPage.deleteBoard();
     }
 
     @Test
     public void deleteBoardWhenDeleteButtonIsClicked() {
 
-        login();
+        BoardsPage boardsPage = new BoardsPage(actions.getDriver());
+        boardsPage.createBoard();
+
         BoardPage boardPage = new BoardPage(actions.getDriver());
-        boardPage.openBoard();
         boardPage.deleteBoard();
-        boardPage.assertBoardDeleted();
+       boardPage.assertBoardDeleted();
+
     }
 }
