@@ -31,11 +31,11 @@ public class BaseTest {
     }
 
     public void logout() {
-
-        actions.waitForElementClickable("//button[@data-testid='header-member-menu-button']");
-        actions.clickElement("//button[@data-testid='header-member-menu-button']");
-        actions.waitForElementClickable("//a[@data-testid='switch-accounts-link']");
-        actions.clickElement("//a[@data-testid='switch-accounts-link']");
+        //I know, this should go into a page
+        actions.waitForElementClickable("trello.logout.memberHeader");
+        actions.clickElement("trello.logout.memberHeader");
+        actions.waitForElementClickable("trello.logout.switchAccounts");
+        actions.clickElement("trello.logout.switchAccounts");
 
     }
 

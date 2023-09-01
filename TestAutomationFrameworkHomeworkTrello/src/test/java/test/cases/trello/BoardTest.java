@@ -76,7 +76,7 @@ public class BoardTest extends BaseTest {
 
         BoardPage boardPage = new BoardPage(actions.getDriver());
         boardPage.deleteBoard();
-       boardPage.assertBoardDeleted();
+        boardPage.assertBoardDeleted();
 
     }
 }

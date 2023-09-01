@@ -29,9 +29,6 @@ public class BoardPage extends BaseTrelloPage {
 
     public void addListToCard(String listName){
 
-        //actions.waitForElementVisible("//span[text()='Add another list' or text()='Add a list']");
-        //actions.clickElement("//span[text()='Add another list' or text()='Add a list']");
-
         actions.waitForElementClickable("trello.createList.titleInput");
         actions.typeValueInField(listName, "trello.createList.titleInput");
 
@@ -79,9 +76,6 @@ public class BoardPage extends BaseTrelloPage {
         actions.waitForElementClickable("trello.boardPage.board.closeBoardConfirm");
         actions.clickElement("trello.boardPage.board.closeBoardConfirm");
 
-//        actions.waitForElementClickable("trello.boardPage.openBoardsMenu");
-//        actions.clickElement("trello.boardPage.openBoardsMenu");
-
     }
 
     public void assertListExists(String listName) {
@@ -97,6 +91,6 @@ public class BoardPage extends BaseTrelloPage {
     }
 
     public void assertBoardDeleted() {
-        actions.waitForElementPresent("//h1[@data-testid='close-board-big-message']");
+        actions.waitForElementPresent("trello.boardPage.assertBoardDeleted");
     }
 }
