@@ -1,0 +1,47 @@
+package pages;
+
+import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+
+public class InventoryPage  extends BasePage {
+
+    public InventoryPage(WebDriver webDriver, WebDriverWait driverWait) {
+        super(webDriver, driverWait, "inventory.html");
+    }
+
+    // locators
+    public By shoppingCartLink = By.className("shopping_cart_link");
+    public By shoppingCartBadge = By.className("shopping_cart_badge");
+    public By shoppingCartContainer = By.className("shopping_cart_container");
+    public By pageTitle = By.xpath("//span[@class='title' and text()='Products']");
+
+
+    // methods
+    public void addProductByTitle(String title){
+        var container = driver.findElement(By.xpath(String.format("//div[@class='inventory_item' and descendant::div[text()='%s']]", title)));
+        container.findElement(By.className("btn_inventory")).click();
+    }
+
+    public void clickShoppingCartLink() {
+        driver.findElement(shoppingCartLink).click();
+    }
+
+    public void waitForPageTitle(){
+        var title = driver.findElement(pageTitle);
+        wait.until(ExpectedConditions.visibilityOf(title));
+    }
+
+    public void assertCartEmpty(){
+        driver.findElement(shoppingCartBadge);
+    }
+
+    public void getPriceByTitle(String title){
+        var container = driver.findElement(By.xpath(String.format("//div[@class='inventory_item' and descendant::div[text()='%s']]", title)));
+        
+    }
+}

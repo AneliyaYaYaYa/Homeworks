@@ -1,0 +1,31 @@
+2023-09-12 15:28:55,513 INFO  [main] Initializing WebDriver
+2023-09-12 15:29:05,051 INFO  [main] Initializing WebDriver
+2023-09-12 15:29:05,052 INFO  [main] Initializing WebDriver
+2023-09-12 15:29:05,052 INFO  [main] Initializing WebDriver
+2023-09-12 15:29:05,052 INFO  [main] Initializing WebDriver
+2023-09-12 15:29:05,053 INFO  [main] Initializing WebDriver
+2023-09-12 15:29:06,727 INFO  [main] Clicking on element jira.loginPage.continueButton
+2023-09-12 15:29:07,147 INFO  [main] Clicking on element jira.loginPage.loginButton
+2023-09-12 15:29:11,086 INFO  [main] Clicking on element jira.contentPage.jiraSoftware
+2023-09-12 15:29:18,579 INFO  [main] Clicking on element jira.projectsPage.createAProject
+2023-09-12 15:29:20,010 INFO  [main] Clicking on element jira.projectsPage.scrumProject
+2023-09-12 15:29:20,557 INFO  [main] Clicking on element jira.projectsPage.useTemplate
+2023-09-12 15:29:21,025 INFO  [main] Clicking on element jira.projectsPage.selectTeamManagedProject
+2023-09-12 15:29:22,168 INFO  [main] Clicking on element jira.projectsPage.nextButton
+2023-09-12 15:29:30,007 INFO  [main] Clicking on element jira.projectsPage.createButton
+2023-09-12 15:29:33,445 INFO  [main] Clicking on element jira.projectsPage.selectProjectDropdown
+2023-09-12 15:29:35,071 INFO  [main] Clicking on element jira.projectsPage.selectIssueType
+2023-09-12 15:29:45,501 INFO  [main] Clicking on element jira.projectsPage.createIssueButton
+2023-09-12 15:29:54,377 INFO  [main] Clicking on element jira.projectsPage.createButton
+2023-09-12 15:29:57,000 INFO  [main] Clicking on element jira.projectsPage.selectProjectDropdown
+2023-09-12 15:30:00,701 INFO  [main] Clicking on element jira.projectsPage.selectIssueType
+2023-09-12 15:30:06,393 INFO  [main] Clicking on element jira.projectsPage.selectProject
+2023-09-12 15:30:12,092 INFO  [main] Clicking on element jira.projectPage.settings
+2023-09-12 15:30:14,623 INFO  [main] Clicking on element jira.projectPage.more
+2023-09-12 15:30:15,046 INFO  [main] Clicking on element jira.projectPage.moveToTrash
+2023-09-12 15:30:15,527 INFO  [main] Clicking on element jira.projectPage.moveConfirm
+2023-09-12 15:30:16,919 INFO  [main] Clicking on element jira.project.goToTrash
+2023-09-12 15:30:20,416 INFO  [main] Clicking on element jira.projectPage.more
+2023-09-12 15:30:20,824 INFO  [main] Clicking on element jira.project.deletePermanently
+2023-09-12 15:30:21,740 INFO  [main] Clicking on element jira.project.deletePermanentlyConfirmation
+2023-09-12 15:30:22,170 INFO  [main] Quitting WebDriver
