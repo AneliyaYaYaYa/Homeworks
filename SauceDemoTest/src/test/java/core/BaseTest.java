@@ -1,5 +1,6 @@
 package core;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.By;
@@ -22,24 +23,20 @@ public class BaseTest {
 
     @BeforeEach
     public  void startUp() {
-        //SWITCH the browser type from here
         driver = BrowserTypes.choseDriver(BrowserTypes.CHROME);
         driver.get(URL);
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
 
+
     @AfterEach
-    public  void terminate() {
+    public void resetApp() {
+        driver.findElement(By.id("react-burger-menu-btn")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("reset_sidebar_link")));
+        driver.findElement(By.id("reset_sidebar_link")).click();
+        driver.get("https://www.saucedemo.com/inventory.html");
         driver.close();
     }
-
-//    @AfterEach
-//    public void resetApp() {
-//        driver.findElement(By.id("react-burger-menu-btn")).click();
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("reset_sidebar_link")));
-//        driver.findElement(By.id("reset_sidebar_link")).click();
-//        driver.get("https://www.saucedemo.com/inventory.html");
-//    }
 
     protected static void authenticateWithUser(LoginForm login) {
         WebElement usernameInput = driver.findElement(By.xpath("//input[@id='user-name']"));

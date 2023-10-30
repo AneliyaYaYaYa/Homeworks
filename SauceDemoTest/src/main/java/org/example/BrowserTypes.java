@@ -14,7 +14,6 @@ import org.openqa.selenium.firefox.FirefoxOptions;
         FIREFOX,
         EDGE_HEADLESS,
         CHROME_HEADLESS,
-
         FIREFOX_HEADLESS;
 
         public static WebDriver choseDriver(BrowserTypes driverType) {
