@@ -1,0 +1,482 @@
+{
+	"info": {
+		"_postman_id": "14f9a588-f531-4ffc-ab8d-f8ae3a0d9777",
+		"name": "Trello_REST API exam",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28723998"
+	},
+	"item": [
+		{
+			"name": "Test the account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200 - OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Response body is not empty\", function () {\r",
+							"    pm.response.to.be.withBody;\r",
+							"});\r",
+							"\r",
+							"console.log(jsonData.id);\r",
+							"console.log(jsonData.fullName);\r",
+							"pm.collectionVariables.set(\"users_name\", jsonData.fullName);\r",
+							"pm.collectionVariables.set(\"users_id\", jsonData.id);\r",
+							"pm.collectionVariables.set(\"users_email\", jsonData.email);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_URL}}/1/members/me?key={{my_key}}&token={{my_token}}",
+					"host": [
+						"{{base_URL}}"
+					],
+					"path": [
+						"1",
+						"members",
+						"me"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{my_key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{my_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200 - OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Key contains board id\", function () {\r",
+							"    pm.expect(jsonData.id.length).to.gt(0);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"console.log(pm.response.json().id)\r",
+							"pm.collectionVariables.set(\"board_id\", jsonData.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n  \"name\": \"My First Trello Board\",\r\n  \r\n  \"desc\": \"testing the API\",\r\n\r\n  \"key\": \"{{my_key}}\",\r\n\r\n  \"token\": \"{{my_token}}\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_URL}}/1/boards?key={{my_key}}&token={{my_token}}",
+					"host": [
+						"{{base_URL}}"
+					],
+					"path": [
+						"1",
+						"boards"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{my_key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{my_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200 - OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.test(\"Key contains list id\", function () {\r",
+							"    pm.expect(jsonData.id.length).to.gt(0);\r",
+							"\r",
+							"});\r",
+							"pm.test(\"List creaetd with a valid name\", function () {\r",
+							"    pm.expect(jsonData.name).to.eq(pm.collectionVariables.get(\"list_name\"));\r",
+							"\r",
+							"});\r",
+							"console.log(jsonData.name)\r",
+							"pm.collectionVariables.set(\"list_id\", jsonData.id);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n\r\n  \r\n  \"desc\": \"testing the API - lists\",\r\n\r\n  \"key\": \"{{my_key}}\",\r\n\r\n  \"token\": \"{{my_token}}\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_URL}}/1/lists?name={{list_name}}&idBoard={{board_id}}&key={{my_key}}&token={{my_token}}",
+					"host": [
+						"{{base_URL}}"
+					],
+					"path": [
+						"1",
+						"lists"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "{{list_name}}"
+						},
+						{
+							"key": "idBoard",
+							"value": "{{board_id}}"
+						},
+						{
+							"key": "key",
+							"value": "{{my_key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{my_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a card",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200 - OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Card contains card id\", function () {\r",
+							"    pm.expect(jsonData.id.length).to.gt(0);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"console.log(pm.response.json().id)\r",
+							"pm.collectionVariables.set(\"card_id\", jsonData.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n  \"name\": \"my second card\",\r\n  \r\n  \"desc\": \"testing the API\",\r\n\r\n  \"key\": \"{{my_key}}\",\r\n\r\n  \"token\": \"{{my_token}}\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_URL}}/1/cards?idList={{list_id}}&key={{my_key}}&token={{my_token}}",
+					"host": [
+						"{{base_URL}}"
+					],
+					"path": [
+						"1",
+						"cards"
+					],
+					"query": [
+						{
+							"key": "idList",
+							"value": "{{list_id}}"
+						},
+						{
+							"key": "key",
+							"value": "{{my_key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{my_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a card",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200 - OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Validate card creation - name\", function () {\r",
+							"       pm.expect(jsonData.name).to.contain(\"updated\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate card creation - id\", function () {\r",
+							"    pm.expect(jsonData.id).to.eq(pm.collectionVariables.get(\"card_id\"));\r",
+							"});\r",
+							"\r",
+							"console.log(pm.response.json().id)\r",
+							"pm.collectionVariables.set(\"card_id\", jsonData.id)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n  \"name\": \"my updated card\",\r\n  \r\n  \"desc\": \"updated description\",\r\n\r\n  \"key\": \"{{my_key}}\",\r\n\r\n  \"token\": \"{{my_token}}\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_URL}}/1/cards/{{card_id}}?key={{my_key}}&token={{my_token}}",
+					"host": [
+						"{{base_URL}}"
+					],
+					"path": [
+						"1",
+						"cards",
+						"{{card_id}}"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{my_key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{my_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a card - advanced",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200 - OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Validate card color\", function () {\r",
+							"    pm.expect(jsonData.cover.color).to.eql(pm.collectionVariables.get(\"card_color\"));\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"console.log(pm.response.json().cover.color)\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"my card with color\",\r\n\r\n  \"cover\": {\r\n      \"color\": \"orange\",\r\n      \"brightness\": \"light\"\r\n  },\r\n\r\n  \"key\": \"{{my_key}}\",\r\n\r\n  \"token\": \"{{my_token}}\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_URL}}/1/cards/{{card_id}}?key={{my_key}}&token={{my_token}}",
+					"host": [
+						"{{base_URL}}"
+					],
+					"path": [
+						"1",
+						"cards",
+						"{{card_id}}"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{my_key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{my_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "ATTA118715fa71ffc6aa138c329822fd907f9271827213fcae121d4e8852019698e01DE38713",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "aneliya.boneva.a50@learn.telerikacademy.com",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "my_id",
+			"value": ""
+		},
+		{
+			"key": "my_email",
+			"value": ""
+		},
+		{
+			"key": "users_id",
+			"value": ""
+		},
+		{
+			"key": "users_email",
+			"value": ""
+		},
+		{
+			"key": "users_name",
+			"value": ""
+		},
+		{
+			"key": "board_id",
+			"value": ""
+		},
+		{
+			"key": "list_name",
+			"value": "My first List on a Board",
+			"type": "string"
+		},
+		{
+			"key": "list_id",
+			"value": ""
+		},
+		{
+			"key": "card_id",
+			"value": ""
+		},
+		{
+			"key": "card_color",
+			"value": "orange",
+			"type": "string"
+		}
+	]
+}
