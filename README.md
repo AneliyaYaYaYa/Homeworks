@@ -4,10 +4,11 @@
 1. [WebDriverHomeworkProject-Search tests](#WebDriverHomeworkProject-Searchtests)
 2. [SauceDemoTest](#SauceDemoTest)
 3. [SauceDemoTestsWithPageObjects](#SauceDemoTestsWithPageObjects)
-4. [TestAutomationFrameworkHomeworkJira](#TestAutomationFrameworkHomeworkJira)
-5. [TestAutomationFrameworkHomeworkTrello](#TestAutomationFrameworkHomeworkTrello)
-6. [RESTAssuredTrelloTests](#RESTAssuredTrelloTests)
-7. [Postman_TrelloTests](#Postman_TrelloTests)
+4. [Postman_TrelloTests](#Postman_TrelloTests)
+5. [RESTAssuredTrelloTests](#RESTAssuredTrelloTests)
+6. [TestAutomationFrameworkHomeworkJira](#TestAutomationFrameworkHomeworkJira)
+7. [TestAutomationFrameworkHomeworkTrello](#TestAutomationFrameworkHomeworkTrello)
+
 
 ---
 
@@ -36,4 +37,21 @@ Taking automation on another level - adding POM to hide implementation details, 
 
 ---
 
-## 
+## Postman_TrelloTests
+API testing Trello using Postman. This project was created from scratch within 2-hours as part of a Web services exam. Task assigned - test initial set-up, create a board, create a list, create a card, update a card(optional), delete a board(optional).
+
+---
+
+## RESTAssuredTrelloTests
+API testing Trello using REST assured. This porject was part of a Web services exam and tests were created within 2-hour window. A sceleton provided by Telerik Academy was provided for the testingproject. Task assigned - test initial set-up, create a board, create a list, create a card, update a card(optional), delete a board(optional).
+
+---
+
+## TestAutomationFrameworkHomeworkJira
+
+---
+
+## TestAutomationFrameworkHomeworkTrello
+ 
+---
+
