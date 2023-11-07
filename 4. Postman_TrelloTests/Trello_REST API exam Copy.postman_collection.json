@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "14f9a588-f531-4ffc-ab8d-f8ae3a0d9777",
-		"name": "Trello_REST API exam",
+		"_postman_id": "340fcd5c-0f7e-4933-8f5c-9c4d5ee41afe",
+		"name": "Trello_REST API exam Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "28723998"
 	},
@@ -13,20 +13,19 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200 - OK\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
 							"var jsonData = pm.response.json();\r",
 							"\r",
 							"pm.test(\"Response body is not empty\", function () {\r",
 							"    pm.response.to.be.withBody;\r",
 							"});\r",
 							"\r",
-							"console.log(jsonData.id);\r",
-							"console.log(jsonData.fullName);\r",
-							"pm.collectionVariables.set(\"users_name\", jsonData.fullName);\r",
-							"pm.collectionVariables.set(\"users_id\", jsonData.id);\r",
-							"pm.collectionVariables.set(\"users_email\", jsonData.email);"
+							"\r",
+							"\r",
+							"//console.log(jsonData.id);\r",
+							"//console.log(jsonData.fullName);\r",
+							"//pm.collectionVariables.set(\"users_name\", jsonData.fullName);\r",
+							"//pm.collectionVariables.set(\"users_id\", jsonData.id);\r",
+							"//pm.collectionVariables.set(\"users_email\", jsonData.email);"
 						],
 						"type": "text/javascript"
 					}
@@ -36,13 +35,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_URL}}/1/members/me?key={{my_key}}&token={{my_token}}",
+					"raw": "{{base_URL}}{{API_version}}{{MEMBERS_ENDPOINT}}/me?key={{my_key}}&token={{my_token}}",
 					"host": [
-						"{{base_URL}}"
+						"{{base_URL}}{{API_version}}{{MEMBERS_ENDPOINT}}"
 					],
 					"path": [
-						"1",
-						"members",
 						"me"
 					],
 					"query": [
@@ -66,10 +63,6 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200 - OK\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
 							"var jsonData = pm.response.json();\r",
 							"\r",
 							"pm.test(\"Key contains board id\", function () {\r",
@@ -77,7 +70,13 @@
 							"\r",
 							"});\r",
 							"\r",
+							"pm.test(\"Verify Board name\", function () {\r",
+							"    pm.expect(jsonData.name).to.eql(pm.collectionVariables.get(\"board_name\"));\r",
+							"\r",
+							"});\r",
+							"\r",
 							"console.log(pm.response.json().id)\r",
+							"console.log(jsonData.name)\r",
 							"pm.collectionVariables.set(\"board_id\", jsonData.id);"
 						],
 						"type": "text/javascript"
@@ -89,7 +88,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\r\n  \"name\": \"My First Trello Board\",\r\n  \r\n  \"desc\": \"testing the API\",\r\n\r\n  \"key\": \"{{my_key}}\",\r\n\r\n  \"token\": \"{{my_token}}\"\r\n\r\n}",
+					"raw": "{\r\n\r\n  \"name\": \"{{board_name}}\",\r\n  \r\n  \"desc\": \"testing the API\",\r\n\r\n  \"key\": \"{{my_key}}\",\r\n\r\n  \"token\": \"{{my_token}}\"\r\n\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -97,13 +96,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_URL}}/1/boards?key={{my_key}}&token={{my_token}}",
+					"raw": "{{base_URL}}{{API_version}}{{BOARDS_ENDPOINT}}?key={{my_key}}&token={{my_token}}",
 					"host": [
-						"{{base_URL}}"
-					],
-					"path": [
-						"1",
-						"boards"
+						"{{base_URL}}{{API_version}}{{BOARDS_ENDPOINT}}"
 					],
 					"query": [
 						{
@@ -126,9 +121,6 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200 - OK\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
 							"\r",
 							"var jsonData = pm.response.json();\r",
 							"pm.test(\"Key contains list id\", function () {\r",
@@ -152,7 +144,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\r\n\r\n  \r\n  \"desc\": \"testing the API - lists\",\r\n\r\n  \"key\": \"{{my_key}}\",\r\n\r\n  \"token\": \"{{my_token}}\"\r\n\r\n}",
+					"raw": "{\r\n\r\n\"name\": \"{{list_name}}\",\r\n  \r\n  \"desc\": \"testing the API - lists\",\r\n\r\n  \"key\": \"{{my_key}}\",\r\n\r\n  \"token\": \"{{my_token}}\"\r\n\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -160,13 +152,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_URL}}/1/lists?name={{list_name}}&idBoard={{board_id}}&key={{my_key}}&token={{my_token}}",
+					"raw": "{{base_URL}}{{API_version}}{{LIST_ENDPOINT}}?name={{list_name}}&idBoard={{board_id}}&key={{my_key}}&token={{my_token}}",
 					"host": [
-						"{{base_URL}}"
-					],
-					"path": [
-						"1",
-						"lists"
+						"{{base_URL}}{{API_version}}{{LIST_ENDPOINT}}"
 					],
 					"query": [
 						{
@@ -197,9 +185,6 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200 - OK\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
 							"\r",
 							"var jsonData = pm.response.json();\r",
 							"\r",
@@ -208,7 +193,10 @@
 							"\r",
 							"});\r",
 							"\r",
+							"pm.test(\"Verify card name\", function () {\r",
+							"    pm.expect(jsonData.name).to.eq(pm.collectionVariables.get(\"card_name\"));\r",
 							"\r",
+							"});\r",
 							"console.log(pm.response.json().id)\r",
 							"pm.collectionVariables.set(\"card_id\", jsonData.id);"
 						],
@@ -227,7 +215,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\r\n  \"name\": \"my second card\",\r\n  \r\n  \"desc\": \"testing the API\",\r\n\r\n  \"key\": \"{{my_key}}\",\r\n\r\n  \"token\": \"{{my_token}}\"\r\n\r\n}",
+					"raw": "{\r\n\r\n  \"name\": \"{{card_name}}\",\r\n  \r\n  \"desc\": \"testing the API\",\r\n\r\n  \"key\": \"{{my_key}}\",\r\n\r\n  \"token\": \"{{my_token}}\"\r\n\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -235,13 +223,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_URL}}/1/cards?idList={{list_id}}&key={{my_key}}&token={{my_token}}",
+					"raw": "{{base_URL}}{{API_version}}{{CARD_ENDPOINT}}?idList={{list_id}}&key={{my_key}}&token={{my_token}}",
 					"host": [
-						"{{base_URL}}"
-					],
-					"path": [
-						"1",
-						"cards"
+						"{{base_URL}}{{API_version}}{{CARD_ENDPOINT}}"
 					],
 					"query": [
 						{
@@ -268,19 +252,17 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200 - OK\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
 							"\r",
 							"var jsonData = pm.response.json();\r",
 							"\r",
-							"pm.test(\"Validate card creation - name\", function () {\r",
+							"pm.test(\"Validate card updated - name contains updated\", function () {\r",
 							"       pm.expect(jsonData.name).to.contain(\"updated\");\r",
 							"});\r",
 							"\r",
-							"pm.test(\"Validate card creation - id\", function () {\r",
+							"pm.test(\"Validate card updated - id\", function () {\r",
 							"    pm.expect(jsonData.id).to.eq(pm.collectionVariables.get(\"card_id\"));\r",
 							"});\r",
+							"\r",
 							"\r",
 							"console.log(pm.response.json().id)\r",
 							"pm.collectionVariables.set(\"card_id\", jsonData.id)"
@@ -308,13 +290,11 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_URL}}/1/cards/{{card_id}}?key={{my_key}}&token={{my_token}}",
+					"raw": "{{base_URL}}{{API_version}}{{CARD_ENDPOINT}}/{{card_id}}?key={{my_key}}&token={{my_token}}",
 					"host": [
-						"{{base_URL}}"
+						"{{base_URL}}{{API_version}}{{CARD_ENDPOINT}}"
 					],
 					"path": [
-						"1",
-						"cards",
 						"{{card_id}}"
 					],
 					"query": [
@@ -338,10 +318,6 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200 - OK\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
 							"var jsonData = pm.response.json();\r",
 							"\r",
 							"pm.test(\"Validate card color\", function () {\r",
@@ -368,7 +344,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"my card with color\",\r\n\r\n  \"cover\": {\r\n      \"color\": \"orange\",\r\n      \"brightness\": \"light\"\r\n  },\r\n\r\n  \"key\": \"{{my_key}}\",\r\n\r\n  \"token\": \"{{my_token}}\"\r\n\r\n}",
+					"raw": "{\r\n    \"name\": \"my card with color\",\r\n\r\n  \"cover\": {\r\n      \"color\": \"{{card_color}}\",\r\n      \"brightness\": \"{{card_brightness}}\"\r\n  },\r\n\r\n  \"key\": \"{{my_key}}\",\r\n\r\n  \"token\": \"{{my_token}}\"\r\n\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -376,14 +352,61 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_URL}}/1/cards/{{card_id}}?key={{my_key}}&token={{my_token}}",
+					"raw": "{{base_URL}}{{API_version}}{{CARD_ENDPOINT}}/{{card_id}}?key={{my_key}}&token={{my_token}}",
 					"host": [
-						"{{base_URL}}"
+						"{{base_URL}}{{API_version}}{{CARD_ENDPOINT}}"
 					],
 					"path": [
-						"1",
-						"cards",
 						"{{card_id}}"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{my_key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{my_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_URL}}{{API_version}}{{BOARDS_ENDPOINT}}/{{board_id}}?key={{my_key}}&token={{my_token}}",
+					"host": [
+						"{{base_URL}}{{API_version}}{{BOARDS_ENDPOINT}}"
+					],
+					"path": [
+						"{{board_id}}"
 					],
 					"query": [
 						{
@@ -405,7 +428,7 @@
 		"basic": [
 			{
 				"key": "password",
-				"value": "ATTA118715fa71ffc6aa138c329822fd907f9271827213fcae121d4e8852019698e01DE38713",
+				"value": "",
 				"type": "string"
 			},
 			{
@@ -430,7 +453,9 @@
 			"script": {
 				"type": "text/javascript",
 				"exec": [
-					""
+					"pm.test(\"Status code is 200 - OK\", function () {",
+					"    pm.response.to.have.status(200);",
+					"});"
 				]
 			}
 		}
@@ -476,6 +501,21 @@
 		{
 			"key": "card_color",
 			"value": "orange",
+			"type": "string"
+		},
+		{
+			"key": "board_name",
+			"value": "My First Trello Board",
+			"type": "string"
+		},
+		{
+			"key": "card_name",
+			"value": "my first card",
+			"type": "string"
+		},
+		{
+			"key": "card_brightness",
+			"value": "light",
 			"type": "string"
 		}
 	]

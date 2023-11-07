@@ -4,8 +4,8 @@ public class Constants {
 
     public static final String BASE_URL = "https://api.trello.com";
     public static final String EMAIL = "aneliya.boneva.a50@learn.telerikacademy.com";
-    public static final String API_KEY = "56b4ea1efef05b7269a55d2878c17bec";
-    public static final String API_TOKEN = "ATTA118715fa71ffc6aa138c329822fd907f9271827213fcae121d4e8852019698e01DE38713";
+    public static final String API_KEY = "";
+    public static final String API_TOKEN = "";
     public static  String BOARD_ID = "64d3ef0c9952f44cf00ed37d";
     public static  String LIST_ID = "64d3ef487e3584c65474a4e6";
     public static  String CARD_ID = "64d3ef816688addbd1fc1383";
