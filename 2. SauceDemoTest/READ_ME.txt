@@ -1,7 +1,7 @@
 # SAUCE DEMO TESTS
 
 The current project presents automated testing using Selenium WebDriver with Java. 
-It includes several test cases that automate loging, adding products and succesfull cehck out. 
+It includes several test cases that automate login, adding products and successful check out.
 The tests are designed to run on different browsers, including Chrome, Firefox, Edge and their headless versions.
 
 ## MAIN
@@ -16,7 +16,7 @@ but did not work as expected, so it is a work in progress. This base class also 
  - LoginForm & UserDetails - two separate classes to help with the fill in forms
 
 ### TEST/SAUCEDEMOTESTS
- - Logintests - a separate class for the login itself;
+ - LoginTests - a separate class for the login itself;
  - ProductTests - I have prepared 2 versions of productAddedToShoppingCart_when_addToCart test - 
 one that checks all items and their prices using CSV tests 
 and another one fo the homework itself. You can run whichever you like. :)
