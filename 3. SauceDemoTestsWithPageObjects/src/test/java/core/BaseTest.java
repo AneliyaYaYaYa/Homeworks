@@ -28,11 +28,11 @@ public class BaseTest {
     public CheckoutOverviewPage checkoutOverviewPage;
     public CheckoutCompletePage checkoutCompletePage;
 
-//    @AfterEach
-//    public void afterTest(){
-//        // close driver
-//        driver.close();
-//    }
+    @AfterEach
+    public void afterTest(){
+        // close driver
+        driver.close();
+    }
 
     @BeforeEach
     public void beforeTests(){
