@@ -51,29 +51,20 @@ public class GoogleSearchByTerm {
                 (By.xpath("//textarea[@name='q'][@class='gLFyf']"));
         searchField.sendKeys(TELERIK_ACADEMY_ALPHA, Keys.ENTER);
 
-        //the button below did not work with Firefox, so it had to go :D
-//        WebElement searchButton = driver.findElement
-//                (By.xpath("//input[@name='btnK'][1]"));
-//        searchButton.click();
-
         WebElement searchFirstResult = driver.findElement
                 (By.xpath("//a/h3[@class='LC20lb MBeuO DKV0Md'][1]"));
         Assertions.assertTrue(searchFirstResult.getText().contains(ALPHA_SEARCH_RESULT) ||
                 (searchFirstResult.getText().contains(ALPHA_SEARCH_RESULT_2)), ERROR_MESSAGE);
     }
-//  //additional test
-//    @Test
-//    public void correctResultFound_when_searchingByTerm_cdpselenium() {
-//        WebElement searchField = driver.findElement
-//                (By.xpath("//textarea[@name='q'][@class='gLFyf']"));
-//        searchField.sendKeys(CDP_SELENIUM, Keys.ENTER);
-//
-//       // WebElement searchButton = driver.findElement
-//       //         (By.xpath("//input[@name='btnK'][1]"));
-//       // searchButton.click();
-//
-//        WebElement searchFirstResult = driver.findElement
-//                (By.xpath("//a/h3[@class='LC20lb MBeuO DKV0Md'][1]"));
-//        Assertions.assertTrue(searchFirstResult.getText().contains(SELENIUM_CDP_RESULT), ERROR_MESSAGE );
-//    }
+  //additional test
+    @Test
+    public void correctResultFound_when_searchingByTerm_cdpselenium() {
+        WebElement searchField = driver.findElement
+                (By.xpath("//textarea[@name='q'][@class='gLFyf']"));
+        searchField.sendKeys(CDP_SELENIUM, Keys.ENTER);
+
+        WebElement searchFirstResult = driver.findElement
+                (By.xpath("//a/h3[@class='LC20lb MBeuO DKV0Md'][1]"));
+        Assertions.assertTrue(searchFirstResult.getText().contains(SELENIUM_CDP_RESULT), ERROR_MESSAGE );
+    }
 }

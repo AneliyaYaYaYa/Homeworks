@@ -58,27 +58,26 @@ public class BingSearchByTerm {
         WebElement searchButton = driver.findElement
                 (By.xpath("//label[@id='search_icon']"));
         searchButton.click();
-//        //some headless browsers were not working without the following wait:
-//        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy
-//                (By.xpath("(//h2)[1]")));
+        //some headless browsers were not working without the following wait:
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy
+                (By.xpath("(//h2)[1]")));
         WebElement searchFirstResult = driver.findElement
                 (By.xpath("(//h2)[1]"));
         Assertions.assertTrue(searchFirstResult.getText().contains(ALPHA_SEARCH_RESULT) ||
                 (searchFirstResult.getText().contains(ALPHA_SEARCH_RESULT_2)), ERROR_MESSAGE );
     }
 
-//    //additional search
-//    @Test
-//    public void correctResultFound_when_searchingByTerm_cdpselenium() {
-//        WebElement searchField = driver.findElement
-//                (By.xpath("//input[@id='sb_form_q']"));
-//        searchField.sendKeys(CDP_SELENIUM, Keys.ENTER); //using keyboard <enter> instead of search button
-//
-//        //Firefox browser is not working without the following wait:
-//        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy
-//                (By.xpath("(//h2/a)[1]")));
-//        WebElement searchFirstResult = driver.findElement
-//                (By.xpath("(//h2/a)[1]"));
-//        Assertions.assertTrue(searchFirstResult.getText().contains(CDP_SEARCH_RESULT), ERROR_MESSAGE );
-//    }
+    @Test
+    public void correctResultFound_when_searchingByTerm_cdpselenium() {
+        WebElement searchField = driver.findElement
+                (By.xpath("//input[@id='sb_form_q']"));
+        searchField.sendKeys(CDP_SELENIUM, Keys.ENTER); //using keyboard <enter> instead of search button
+
+        //Firefox browser is not working without the following wait:
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy
+                (By.xpath("(//h2/a)[1]")));
+        WebElement searchFirstResult = driver.findElement
+                (By.xpath("(//h2/a)[1]"));
+        Assertions.assertTrue(searchFirstResult.getText().contains(CDP_SEARCH_RESULT), ERROR_MESSAGE );
+    }
 }
