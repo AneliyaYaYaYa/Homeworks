@@ -48,10 +48,12 @@ API testing Trello using REST assured. This porject was part of a Web services e
 ---
 
 ## TestAutomationFrameworkHomeworkJira
+Working on Framework presented to us by Telerik Academy. Our task - to create Issue and Bug in Jira and link them together using Selenium WebDriver and the Framework.
 
 ---
 
 ## TestAutomationFrameworkHomeworkTrello
+[under construction]
  
 ---
 
